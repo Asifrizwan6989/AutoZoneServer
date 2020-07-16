@@ -135,7 +135,7 @@ router.route("/signin").post((req, res) => {
       emailid: emailid,
     },
     (err, existingUsers) => {
-      if (existingUsers.length === 0) {
+      if ((!existingUsers) || existingUsers.length === 0) {
         res.status(404).send("sorry email id not exists");
         // res.send("Error: Server error");
       } else if (existingUsers.length > 0) {
