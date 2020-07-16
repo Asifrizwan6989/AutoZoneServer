@@ -100,7 +100,7 @@ router.route("/signup").post((req, res) => {
       if (err) {
         res.send("Error: Server error");
       } else if (previousUsers.length > 0) {
-        res.status(409).send('sorry email id exsist')
+        res.status(404).send('sorry email id exsist')
       }else{
 
       const newUser = new User();
@@ -143,7 +143,8 @@ router.route("/signin").post((req, res) => {
     (err, existingUsers) => {
       // this.password=password;
       if (err) {
-        res.send("Error: Server error");
+        res.status(404).send('sorry email id not exists')
+       // res.send("Error: Server error");
       } else if (existingUsers.length > 0) {
         const newUsers = new User();
         newUsers.password = existingUsers[0].password;
@@ -156,7 +157,7 @@ router.route("/signin").post((req, res) => {
          refreshTokens.push(refreshToken);
          res.json({ accessToken: accessToken, refreshToken: refreshToken })
         } else {
-          res.send("Error: invalid Password ");
+          res.status(404).send('sorry invalid Password')
         }
       }
     }
